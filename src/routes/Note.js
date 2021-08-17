@@ -1,22 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const { v4: uuidv4 } = require("uuid");
-
-const notes = [];
+let Note = require("../models/noteModel");
 
 router.get;
 
-router.get("/", (req, res) => {
-    res.json(notes);
-});
+router.get("/", (req, res) => {});
 
 router.post("/", (req, res) => {
-    let title = req.headers.title;
-    let content = req.headers.content;
-    let id = uuidv4();
-
-    notes.push({ id, title, content });
-
+    new Note({
+        title: req.headers.title,
+        body: req.headers.body,
+        date: new Date(),
+        id: uuidv4(),
+    });
     res.status(201).json("Note created!");
 });
 
