@@ -11,6 +11,15 @@ router.get("/", (req, res) => {
         .catch((err) => res.status(400).json("Error" + err));
 });
 
+router.get("/find", (req, res) => {
+    let id = req.headers.id;
+    async function auth() {
+        const doc = await Note.findOne({ id: id }).exec();
+        return res.json(doc);
+    }
+    auth();
+});
+
 router.post("/", (req, res) => {
     const title = req.headers.title;
     const body = req.headers.body;
