@@ -5,16 +5,29 @@ let Note = require("../models/noteModel");
 
 router.get;
 
-router.get("/", (req, res) => {});
+router.get("/", (req, res) => {
+    Note.find()
+        .then((notes) => res.json(notes))
+        .catch((err) => res.status(400).json("Error" + err));
+});
 
 router.post("/", (req, res) => {
-    new Note({
-        title: req.headers.title,
-        body: req.headers.body,
-        date: new Date(),
-        id: uuidv4(),
+    const title = req.headers.title;
+    const body = req.headers.body;
+    const id = uuidv4();
+
+    const newNote = new Note({
+        title,
+        body,
+        id,
     });
-    res.status(201).json("Note created!");
+
+    newNote
+        .save()
+        .then(() => {
+            res.status(201).json("Note taken!");
+        })
+        .catch((err) => res.status(400).json("Error" + err));
 });
 
 module.exports = router;
