@@ -6,9 +6,16 @@ let Note = require("../models/noteModel");
 router.get;
 
 router.get("/", (req, res) => {
-    Note.find()
-        .then((notes) => res.json(notes))
-        .catch((err) => res.status(400).json("Error" + err));
+    async function findNote() {
+        try {
+            let notes = await Note.find();
+            return res.status(201).json(notes);
+        } catch (error) {
+            return res.status(400).json("Error" + error);
+        }
+    }
+
+    findNote();
 });
 
 router.get("/find", (req, res) => {
@@ -25,18 +32,21 @@ router.post("/", (req, res) => {
     const body = req.headers.body;
     const id = uuidv4();
 
-    const newNote = new Note({
-        title,
-        body,
-        id,
-    });
+    async function createNewNote() {
+        const newNote = new Note({
+            title,
+            body,
+            id,
+        });
 
-    newNote
-        .save()
-        .then(() => {
-            res.status(201).json("Note taken!");
-        })
-        .catch((err) => res.status(400).json("Error" + err));
+        try {
+            await newNote.save();
+            return res.status(201).json("Note taken!");
+        } catch (error) {
+            res.status(400).json("Error" + error);
+        }
+    }
+    createNewNote();
 });
 
 module.exports = router;
