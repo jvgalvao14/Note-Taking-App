@@ -5,6 +5,7 @@ let Note = require("../models/noteModel");
 
 router.get;
 
+//Returns the whole "Note" collection.
 router.get("/", (req, res) => {
     async function findNote() {
         try {
@@ -18,15 +19,17 @@ router.get("/", (req, res) => {
     findNote();
 });
 
+//Returns especific "Note" with the ID passed through headers.
 router.get("/find", (req, res) => {
     let id = req.headers.id;
-    async function auth() {
+    async function findNote() {
         const doc = await Note.findOne({ id: id }).exec();
         return res.json(doc);
     }
-    auth();
+    findNote();
 });
 
+//Creates a "Note" and saves it to the DB Collection.
 router.post("/", (req, res) => {
     const title = req.headers.title;
     const body = req.headers.body;
@@ -47,6 +50,20 @@ router.post("/", (req, res) => {
         }
     }
     createNewNote();
+});
+
+//deletes a Note.
+router.delete("/", (req, res) => {
+    const noteId = req.headers.id;
+    async function deleteNote() {
+        try {
+            await Note.deleteOne({ id: noteId }).exec();
+            return res.status(201).json("Note deleted");
+        } catch (error) {
+            return res.status(400).json(error);
+        }
+    }
+    deleteNote();
 });
 
 module.exports = router;
