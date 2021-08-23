@@ -6,7 +6,7 @@ let connection = (uri) => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
             useCreateIndex: true,
-            useFindAndModify: true,
+            useFindAndModify: false,
         });
         const connection = mongoose.connection;
         connection.once("open", () => {

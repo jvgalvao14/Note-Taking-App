@@ -1,6 +1,6 @@
 const express = require("express");
+const { Mongoose } = require("mongoose");
 const router = express.Router();
-const { v4: uuidv4 } = require("uuid");
 let Note = require("../models/noteModel");
 
 router.get;
@@ -19,12 +19,16 @@ router.get("/", (req, res) => {
     findNote();
 });
 
-//Returns especific "Note" with the ID passed through headers.
-router.get("/find", (req, res) => {
-    let id = req.headers.id;
+//Returns especific "Note" with the ID passed through params.
+router.get("/:id", (req, res) => {
+    let id = req.params.id;
     async function findNote() {
-        const doc = await Note.findOne({ id: id }).exec();
-        return res.json(doc);
+        try {
+            const doc = await Note.findOne({ _id: id });
+            return res.json(doc);
+        } catch (error) {
+            return res.status(404).json(error);
+        }
     }
     findNote();
 });
@@ -33,13 +37,11 @@ router.get("/find", (req, res) => {
 router.post("/", (req, res) => {
     const title = req.headers.title;
     const body = req.headers.body;
-    const id = uuidv4();
 
     async function createNewNote() {
         const newNote = new Note({
             title,
             body,
-            id,
         });
 
         try {
@@ -53,12 +55,12 @@ router.post("/", (req, res) => {
 });
 
 //deletes a Note.
-router.delete("/", (req, res) => {
-    const noteId = req.headers.id;
+router.delete("/:id", (req, res) => {
+    const noteId = req.params.id;
     async function deleteNote() {
         try {
-            await Note.deleteOne({ id: noteId }).exec();
-            return res.status(201).json("Note deleted");
+            await Note.findByIdAndRemove({ _id: noteId });
+            return res.status(201).json("Note deleted!");
         } catch (error) {
             return res.status(400).json(error);
         }
