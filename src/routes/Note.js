@@ -18,6 +18,11 @@ router.get("/", (req, res) => {
     findNote();
 });
 
+//testing the Pug view engine
+router.get("/pug", function (req, res) {
+    res.render("index", { title: "Hey", message: "Hello there!" });
+});
+
 //Returns especific "Note" with the ID passed through params.
 router.get("/:id", (req, res) => {
     let id = req.params.id;
