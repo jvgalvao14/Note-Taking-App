@@ -1,5 +1,4 @@
 const express = require("express");
-const { Mongoose } = require("mongoose");
 const router = express.Router();
 let Note = require("../models/noteModel");
 
@@ -66,6 +65,30 @@ router.delete("/:id", (req, res) => {
         }
     }
     deleteNote();
+});
+
+//Updates a Note
+router.get("/update/:id", (req, res) => {
+    const update = {
+        title: req.headers.title,
+        body: req.headers.body,
+    };
+    const id = req.params.id;
+    async function updateNote() {
+        try {
+            Note.findOneAndUpdate(
+                { _id: id },
+                update,
+                { new: true },
+                (note) => {
+                    return res.status(201).json("Deu certo!");
+                }
+            );
+        } catch (error) {
+            return res.json("Deu errado :( " + error);
+        }
+    }
+    updateNote();
 });
 
 module.exports = router;
