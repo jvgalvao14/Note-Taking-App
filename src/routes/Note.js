@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 let Note = require("../models/noteModel");
 
-router.get;
-
 //Returns the whole "Note" collection.
 router.get("/", (req, res) => {
     async function findNote() {
@@ -16,11 +14,6 @@ router.get("/", (req, res) => {
     }
 
     findNote();
-});
-
-//testing the Pug view engine
-router.get("/pug", function (req, res) {
-    res.render("index", { title: "Hey", message: "Hello there!" });
 });
 
 //Returns especific "Note" with the ID passed through params.
