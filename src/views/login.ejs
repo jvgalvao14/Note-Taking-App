@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <h1>Login</h1>
+        <form action="/user/create" method="POST">
+            <input
+                name="username"
+                type="text"
+                placeholder="Username"
+                required
+            /><br />
+            <input
+                name="password"
+                type="password"
+                placeholder="Password"
+                required
+            /><br />
+            <input type="submit" value="Login" />
+        </form>
+        <% if(message) { %>
+        <p>
+            <label><%= message %> </label>
+        </p>
+        <% } %>
+        <p>
+            <a href="/user/forgot">Forgot your password?</a> |
+            <a href="/user/signup">Sign-up!</a>
+        </p>
+    </body>
+</html>
