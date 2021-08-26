@@ -9,28 +9,48 @@
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
             rel="stylesheet"
         />
+        <style>
+            body {
+                padding: 300px;
+            }
+        </style>
     </head>
     <body>
         <form action="/user/create" method="POST">
-            <input
-                name="username"
-                type="text"
-                placeholder="Username"
-                required
-            /><br />
-            <input
-                name="email"
-                type="email"
-                placeholder="Email"
-                required
-            /><br />
-            <input
-                name="password"
-                type="password"
-                placeholder="Password"
-                required
-            /><br />
-            <input type="submit" value="Login" />
+            <div class="container-fluid">
+                <div class="d-flex justify-content-center flex-column">
+                    <div class="form-group p-2">
+                        <input
+                            class="form-control"
+                            name="username"
+                            type="text"
+                            placeholder="Enter username"
+                            required
+                        /><br />
+                    </div>
+                    <div class="form-group p-2">
+                        <input
+                            class="form-control"
+                            name="email"
+                            type="email"
+                            placeholder="Enter email"
+                            required
+                        /><br />
+                    </div>
+                    <div class="form-group p-2">
+                        <input
+                            class="form-control"
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            required
+                        /><br />
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">
+                        Sign Up
+                    </button>
+                </div>
+            </div>
         </form>
     </body>
 </html>

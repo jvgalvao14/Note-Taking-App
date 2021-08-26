@@ -18,7 +18,7 @@ router.post("/create", urlencodedParser, async (req, res) => {
         });
 
         await newUser.save();
-        return res.status(201).json("Note taken!");
+        return res.status(201).redirect("/login");
     } catch (error) {
         res.status(400).json("Error" + error);
     }
