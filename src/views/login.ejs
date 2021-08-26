@@ -12,7 +12,7 @@
     </head>
     <body>
         <h1>Login</h1>
-        <form action="/user/create" method="POST">
+        <form action="/user/auth" method="POST">
             <input
                 name="username"
                 type="text"
@@ -25,6 +25,7 @@
                 placeholder="Password"
                 required
             /><br />
+
             <input type="submit" value="Login" />
         </form>
         <% if(message) { %>
@@ -34,7 +35,7 @@
         <% } %>
         <p>
             <a href="/user/forgot">Forgot your password?</a> |
-            <a href="/user/signup">Sign-up!</a>
+            <a href="/user/signup">Sign up!</a>
         </p>
     </body>
 </html>

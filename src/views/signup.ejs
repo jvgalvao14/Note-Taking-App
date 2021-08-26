@@ -5,6 +5,32 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Sign Up</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
     </head>
-    <body></body>
+    <body>
+        <form action="/user/create" method="POST">
+            <input
+                name="username"
+                type="text"
+                placeholder="Username"
+                required
+            /><br />
+            <input
+                name="email"
+                type="email"
+                placeholder="Email"
+                required
+            /><br />
+            <input
+                name="password"
+                type="password"
+                placeholder="Password"
+                required
+            /><br />
+            <input type="submit" value="Login" />
+        </form>
+    </body>
 </html>
