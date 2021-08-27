@@ -9,15 +9,23 @@
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
             rel="stylesheet"
         />
-        <style>
-            body {
-                padding: 300px;
-            }
-        </style>
     </head>
     <body>
+        <div class="container">
+            <header class="d-flex justify-content-center py-3">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active">Home</a>
+                    </li>
+                </ul>
+            </header>
+        </div>
         <form action="/user/create" method="POST">
-            <div class="container-fluid">
+            <div
+                class="container-fluid"
+                style="max-width: 500px; padding-top: 180px"
+            >
+                <h1>Sign up!</h1>
                 <div class="d-flex justify-content-center flex-column">
                     <div class="form-group p-2">
                         <input
@@ -49,6 +57,7 @@
                     <button class="w-100 btn btn-lg btn-primary" type="submit">
                         Sign Up
                     </button>
+                    <p>I already have a <a href="/login">login</a></p>
                 </div>
             </div>
         </form>

@@ -11,31 +11,54 @@
         />
     </head>
     <body>
-        <h1>Login</h1>
+        <div class="container">
+            <header class="d-flex justify-content-center py-3">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active">Home</a>
+                    </li>
+                </ul>
+            </header>
+        </div>
         <form action="/user/auth" method="POST">
-            <input
-                name="username"
-                type="text"
-                placeholder="Username"
-                required
-            /><br />
-            <input
-                name="password"
-                type="password"
-                placeholder="Password"
-                required
-            /><br />
-
-            <input type="submit" value="Login" />
+            <div
+                class="container-fluid"
+                style="max-width: 500px; padding-top: 200px"
+            >
+                <h1>Login</h1>
+                <div class="d-flex justify-content-center flex-column">
+                    <div class="form-group p-2">
+                        <input
+                            class="form-control"
+                            name="username"
+                            type="text"
+                            placeholder="Enter username"
+                            required
+                        /><br />
+                    </div>
+                    <div class="form-group p-2">
+                        <input
+                            class="form-control"
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            required
+                        /><br />
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">
+                        Login
+                    </button>
+                </div>
+                <p class="">
+                    <a href="/user/forgot">Forgot your password?</a> |
+                    <a href="/user/signup">Sign up!</a>
+                </p>
+            </div>
         </form>
         <% if(message) { %>
         <p>
             <label><%= message %> </label>
         </p>
         <% } %>
-        <p>
-            <a href="/user/forgot">Forgot your password?</a> |
-            <a href="/user/signup">Sign up!</a>
-        </p>
     </body>
 </html>
