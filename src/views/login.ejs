@@ -11,6 +11,7 @@
         />
     </head>
     <body>
+        <% if(messages.error) {%> <%= messages.error %> <% } %>
         <div class="container">
             <header class="d-flex justify-content-center py-3">
                 <ul class="nav nav-pills">
@@ -55,10 +56,5 @@
                 </p>
             </div>
         </form>
-        <% if(message) { %>
-        <p>
-            <label><%= message %> </label>
-        </p>
-        <% } %>
     </body>
 </html>
