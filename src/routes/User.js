@@ -5,8 +5,10 @@ const session = require("express-session");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
+const flash = require("express-flash");
 
 //Middlewares
+router.use(flash());
 router.use(
     session({
         secret: process.env.SESSION_SECRET,
@@ -89,7 +91,10 @@ router.get("/", isLoggedIn, (req, res) => {
 });
 
 router.get("/login", isLoggedOut, (req, res) => {
-    res.render("login");
+    const response = {
+        error: req.query.error,
+    };
+    res.render("login", { response });
 });
 
 router.post(
@@ -99,10 +104,6 @@ router.post(
         failureRedirect: "/login?error=true",
     })
 );
-
-router.get("/login", (req, res) => {
-    res.render("login");
-});
 
 router.get("/logout", (req, res) => {
     req.logout();
