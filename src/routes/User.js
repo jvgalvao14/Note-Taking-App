@@ -118,4 +118,8 @@ router.get("/user/forgot", (req, res) => {
     res.render("forgot");
 });
 
+router.post("/user/forgot", async (req, res) => {
+    const hashedPass = await bcrypt.hash(req.body.password, 10);
+});
+
 module.exports = router;
