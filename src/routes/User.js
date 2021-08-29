@@ -120,6 +120,18 @@ router.get("/user/forgot", (req, res) => {
 
 router.post("/user/forgot", async (req, res) => {
     const hashedPass = await bcrypt.hash(req.body.password, 10);
+    const email = req.body.email;
+
+    try {
+        User.findOneAndUpdate(
+            { email: email },
+            { password: hashedPass },
+            () => {}
+        );
+    } catch (error) {
+        return res.json(error);
+    }
+    return res.redirect("/login");
 });
 
 module.exports = router;
