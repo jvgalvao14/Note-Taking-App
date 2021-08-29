@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 let Note = require("../models/noteModel");
 
+router.use(express.urlencoded({ extended: true }));
+router.use(express.json());
+
 //Returns the whole "Note" collection.
 router.get("/", (req, res) => {
     async function findNote() {
@@ -32,8 +35,8 @@ router.get("/:id", (req, res) => {
 
 //Creates a "Note" and saves it to the DB Collection.
 router.post("/", (req, res) => {
-    const title = req.headers.title;
-    const body = req.headers.body;
+    const title = req.body.title;
+    const body = req.body.body;
 
     async function createNewNote() {
         const newNote = new Note({
@@ -67,9 +70,12 @@ router.delete("/:id", (req, res) => {
 
 //Updates a Note
 router.get("/update/:id", (req, res) => {
+    const title = req.body.title;
+    const body = req.body.body;
+
     const update = {
-        title: req.headers.title,
-        body: req.headers.body,
+        title: title,
+        body: body,
     };
     const id = req.params.id;
     async function updateNote() {
