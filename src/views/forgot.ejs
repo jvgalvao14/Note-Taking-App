@@ -10,5 +10,39 @@
             rel="stylesheet"
         />
     </head>
-    <body></body>
+    <body>
+        <form action="/user/auth" method="POST">
+            <div
+                class="container-fluid"
+                style="max-width: 500px; padding-top: 200px"
+            >
+                <h1>Password Recovery</h1>
+
+                <div class="d-flex justify-content-center flex-column">
+                    <div class="form-group p-2">
+                        <input
+                            class="form-control"
+                            name="username"
+                            type="text"
+                            placeholder="Username"
+                            required
+                        /><br />
+                    </div>
+                    <div class="form-group p-2">
+                        <input
+                            class="form-control"
+                            name="password"
+                            type="password"
+                            placeholder="New password"
+                            required
+                        /><br />
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">
+                        Change password
+                    </button>
+                    <p>Get back to <a href="/login">login</a></p>
+                </div>
+            </div>
+        </form>
+    </body>
 </html>
