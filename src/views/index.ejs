@@ -9,9 +9,84 @@
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
             rel="stylesheet"
         />
+        <style>
+            body {
+                padding-left: 50px;
+                padding-top: 20px;
+            }
+        </style>
     </head>
     <body>
-        <div class="container">
+        <div>
+            <a
+                class="btn btn-primary btn-lg justify-content-center"
+                data-bs-toggle="offcanvas"
+                href="#offcanvasExample"
+                role="button"
+                aria-controls="offcanvasExample"
+            >
+                Create a Note
+            </a>
+        </div>
+        <header class="d-flex py-3">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a href="/logout" class="nav-link active">Logout</a>
+                </li>
+            </ul>
+        </header>
+
+        <div
+            class="offcanvas offcanvas-start"
+            tabindex="-1"
+            id="offcanvasExample"
+            aria-labelledby="offcanvasExampleLabel"
+        >
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                    Create a note!
+                </h5>
+                <button
+                    type="button"
+                    class="btn-close text-reset"
+                    data-bs-dismiss="offcanvas"
+                    aria-label="Close"
+                ></button>
+            </div>
+            <div class="offcanvas-body">
+                <form action="/notes" method="POST">
+                    <div class="container-fluid">
+                        <div class="d-flex justify-content-center flex-column">
+                            <div class="form-group p-2">
+                                <input
+                                    class="form-control"
+                                    name="title"
+                                    type="text"
+                                    placeholder="Title"
+                                    required
+                                /><br />
+                            </div>
+                            <div class="form-group p-2">
+                                <textarea
+                                    name="body"
+                                    id="body"
+                                    cols="30"
+                                    rows="10"
+                                    required
+                                ></textarea>
+                            </div>
+                            <button
+                                class="w-100 btn btn-lg btn-primary"
+                                type="submit"
+                            >
+                                Take
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- <div class="container">
             <header class="d-flex justify-content-start py-3">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
@@ -19,6 +94,44 @@
                     </li>
                 </ul>
             </header>
-        </div>
+            <form action="/user/auth" method="POST">
+                <div
+                    class="container-fluid"
+                    style="max-width: 500px; padding-top: 200px"
+                >
+                    <div class="d-flex justify-content-center flex-column">
+                        <div class="form-group p-2">
+                            <input
+                                class="form-control"
+                                name="username"
+                                type="text"
+                                placeholder="Username"
+                                required
+                            /><br />
+                        </div>
+                        <div class="form-group p-2">
+                            <input
+                                class="form-control"
+                                name="password"
+                                type="password"
+                                placeholder="Password"
+                                required
+                            /><br />
+                        </div>
+                        <button
+                            class="w-100 btn btn-lg btn-primary"
+                            type="submit"
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div> -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+            crossorigin="anonymous"
+        ></script>
     </body>
 </html>

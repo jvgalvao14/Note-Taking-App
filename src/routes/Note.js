@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 let Note = require("../models/noteModel");
+const cookieParser = require("cookie-parser");
 
+//Middlewares
+router.use(cookieParser());
 router.use(express.urlencoded({ extended: true }));
 router.use(express.json());
 
@@ -46,7 +49,7 @@ router.post("/", (req, res) => {
 
         try {
             await newNote.save();
-            return res.status(201).json("Note taken!");
+            return res.status(201).redirect("/");
         } catch (error) {
             res.status(400).json("Error" + error);
         }

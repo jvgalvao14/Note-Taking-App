@@ -6,8 +6,10 @@ const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcryptjs");
 const flash = require("express-flash");
+const cookieParser = require("cookie-parser");
 
 //Middlewares
+router.use(cookieParser());
 router.use(flash());
 router.use(
     session({
@@ -17,6 +19,22 @@ router.use(
     })
 );
 router.use(express.urlencoded({ extended: true }));
+
+//checks if the user is logged in
+const isLoggedIn = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/login");
+};
+
+//checks if the user is logged out
+const isLoggedOut = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect("/");
+};
 
 //Passport.js
 router.use(passport.initialize());
@@ -55,6 +73,9 @@ passport.use(
     })
 );
 
+//Routes
+
+//Create a User
 router.post("/user/create", async (req, res) => {
     try {
         const hashedPass = await bcrypt.hash(req.body.password, 10);
@@ -72,21 +93,8 @@ router.post("/user/create", async (req, res) => {
     }
 });
 
-const isLoggedIn = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/login");
-};
-
-const isLoggedOut = (req, res, next) => {
-    if (!req.isAuthenticated()) {
-        return next();
-    }
-    res.redirect("/");
-};
-
 router.get("/", isLoggedIn, (req, res) => {
+    const id = String(req.user._id);
     res.render("index");
 });
 
@@ -107,6 +115,7 @@ router.post(
 
 router.get("/logout", (req, res) => {
     req.logout();
+    res.clearCookie("id");
     res.redirect("/");
 });
 
