@@ -40,11 +40,13 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
     const title = req.body.title;
     const body = req.body.body;
+    const noteId = req.cookies.id;
 
     async function createNewNote() {
         const newNote = new Note({
             title,
             body,
+            noteId,
         });
 
         try {

@@ -5,6 +5,7 @@ const noteSchema = new Schema(
     {
         title: String,
         body: String,
+        noteId: String,
     },
     {
         timestamps: true,

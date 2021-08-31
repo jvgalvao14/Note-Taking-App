@@ -94,7 +94,7 @@ router.post("/user/create", async (req, res) => {
 });
 
 router.get("/", isLoggedIn, (req, res) => {
-    const id = String(req.user._id);
+    res.cookie("id", req.user.id);
     res.render("index");
 });
 
