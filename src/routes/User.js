@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 let User = require("../models/userModel");
+let Note = require("../models/noteModel");
 const session = require("express-session");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
@@ -93,9 +94,17 @@ router.post("/user/create", async (req, res) => {
     }
 });
 
-router.get("/", isLoggedIn, (req, res) => {
+router.get("/", isLoggedIn, async (req, res) => {
     res.cookie("id", req.user.id);
-    res.render("index");
+    let noteId = req.user.id;
+    try {
+        const notes = await Note.find();
+        console.log(notes);
+        res.render("index", { notes });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Oops...");
+    }
 });
 
 router.get("/login", isLoggedOut, (req, res) => {

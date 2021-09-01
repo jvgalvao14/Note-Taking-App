@@ -35,7 +35,19 @@
                 </li>
             </ul>
         </header>
+        <main>
+            <div class="container">
+                <h1>Notes</h1>
 
+                <% notes.forEach(function(foundNote, i){%>
+                <tr>
+                    <td><%= foundNote.title %></td>
+                    <br />
+                    <td><%= foundNote.body %></td>
+                </tr>
+                <%})%>
+            </div>
+        </main>
         <div
             class="offcanvas offcanvas-start"
             tabindex="-1"
@@ -53,6 +65,7 @@
                     aria-label="Close"
                 ></button>
             </div>
+
             <div class="offcanvas-body">
                 <form action="/notes" method="POST">
                     <div class="container-fluid">
