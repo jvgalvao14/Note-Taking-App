@@ -37,6 +37,14 @@ const isLoggedOut = (req, res, next) => {
     res.redirect("/");
 };
 
+const checkUsername = async (req, res, next) => {
+    const username = req.body.username;
+    User.findOne({ username: username }, () => {
+        return next();
+    });
+    return res.redirect("/login");
+};
+
 //Passport.js
 router.use(passport.initialize());
 router.use(passport.session());
@@ -77,7 +85,7 @@ passport.use(
 //Routes
 
 //Create a User
-router.post("/user/create", async (req, res) => {
+router.post("/user/create", checkUsername, async (req, res) => {
     try {
         const hashedPass = await bcrypt.hash(req.body.password, 10);
 
@@ -96,7 +104,6 @@ router.post("/user/create", async (req, res) => {
 
 router.get("/", isLoggedIn, async (req, res) => {
     res.cookie("id", req.user.id);
-    let noteId = req.user.id;
     try {
         const notes = await Note.find();
         console.log(notes);
