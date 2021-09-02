@@ -60,12 +60,12 @@ router.post("/", (req, res) => {
 });
 
 //deletes a Note.
-router.delete("/:id", (req, res) => {
+router.get("/delete/:id", (req, res) => {
     const noteId = req.params.id;
     async function deleteNote() {
         try {
             await Note.findByIdAndRemove({ _id: noteId });
-            return res.status(201).json("Note deleted!");
+            return res.status(201).redirect("/");
         } catch (error) {
             return res.status(400).json(error);
         }

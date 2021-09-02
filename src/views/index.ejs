@@ -44,12 +44,12 @@
                     </div>
                     <div class="card-body">
                         <h3 class="card-text"><%= noteFound.body %></h3>
-                        <button
-                            type="button"
-                            class="w-100 btn btn-lg btn-outline-primary"
+                        <a
+                            data-confirm="Are you sure?"
+                            href="/notes/delete/<%=noteFound.id%>"
+                            class="nav-link active"
+                            >Delete a note</a
                         >
-                            Delete note
-                        </button>
                     </div>
                 </div>
             </div>
