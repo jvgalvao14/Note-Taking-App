@@ -106,7 +106,6 @@ router.get("/", isLoggedIn, async (req, res) => {
     res.cookie("id", req.user.id);
     try {
         const notes = await Note.find();
-        console.log(notes);
         res.render("index", { notes });
     } catch (error) {
         console.error(error);
