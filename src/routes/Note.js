@@ -85,14 +85,9 @@ router.get("/update/:id", (req, res) => {
     const id = req.params.id;
     async function updateNote() {
         try {
-            Note.findOneAndUpdate(
-                { _id: id },
-                update,
-                { new: true },
-                (note) => {
-                    return res.status(201).json("Deu certo!");
-                }
-            );
+            Note.findOneAndUpdate({ _id: id }, update, { new: true }, () => {
+                return res.status(201).json("Deu certo!");
+            });
         } catch (error) {
             return res.json("Deu errado :( " + error);
         }
