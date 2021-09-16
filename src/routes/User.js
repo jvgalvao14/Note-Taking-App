@@ -37,6 +37,7 @@ const isLoggedOut = (req, res, next) => {
     res.redirect("/");
 };
 
+//Checks if the username already exists
 const checkUsername = async (req, res, next) => {
     const username = req.body.username;
     User.findOne({ username: username }, () => {
@@ -45,7 +46,7 @@ const checkUsername = async (req, res, next) => {
     return res.redirect("/login");
 };
 
-//Passport.js
+//Passport.js configuration
 router.use(passport.initialize());
 router.use(passport.session());
 
@@ -81,6 +82,7 @@ passport.use(
         });
     })
 );
+//End of passport.js configuration
 
 //Routes
 
@@ -101,7 +103,8 @@ router.post("/user/create", checkUsername, async (req, res) => {
         res.status(400).json("Error" + error);
     }
 });
-
+//Main view, checks if the user is logged in and serializes the ID cookie
+//used to pass the User ID to the notes.
 router.get("/", isLoggedIn, async (req, res) => {
     res.cookie("id", req.user.id);
     try {
@@ -120,6 +123,7 @@ router.get("/login", isLoggedOut, (req, res) => {
     res.render("login", { response });
 });
 
+//User authentication
 router.post(
     "/user/auth",
     passport.authenticate("local", {
@@ -130,7 +134,10 @@ router.post(
 
 router.get("/logout", (req, res) => {
     req.logout();
+
+    //clearing the id cookies
     res.clearCookie("id");
+
     res.redirect("/");
 });
 
@@ -146,6 +153,7 @@ router.post("/user/forgot", async (req, res) => {
     const hashedPass = await bcrypt.hash(req.body.password, 10);
     const email = req.body.email;
 
+    //Finds a user with the same email as passe through body and updates the password.
     try {
         User.findOneAndUpdate(
             { email: email },
