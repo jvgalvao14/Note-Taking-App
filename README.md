@@ -1,6 +1,6 @@
 <h1 align='center'>Note Taking</h1>
 
-<p align='center'>Web app made with NodeJS, Express, EJS and MongoDB</p>
+<p align='center'>Web app made with NodeJS, Express, EJS, Passport.js and MongoDB</p>
 
 # How to use
 
