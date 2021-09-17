@@ -14,7 +14,7 @@
 
 ![.env](https://i.imgur.com/Z5yru57.png)
 
-- Now you can run the starting script! 🤝
+- Now you can run the starting script! 😎
 
 ```
     npm start
