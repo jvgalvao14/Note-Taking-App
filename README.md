@@ -21,6 +21,7 @@
 ``` 
 
 - Open your browser and access **http://localhost/port**, the port being the one that you defined on the .env file.
+##
 - That will take you to the login page, where you can create an account, log in and Create and delete some notes, in case you forget you password, there is a way to recover it too 🙌
 
 ![Login page](https://i.imgur.com/xU9OgCo.png)
