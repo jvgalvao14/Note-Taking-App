@@ -106,9 +106,10 @@ router.post("/user/create", checkUsername, async (req, res) => {
 //Main view, checks if the user is logged in and serializes the ID cookie
 //used to pass the User ID to the notes.
 router.get("/", isLoggedIn, async (req, res) => {
+    let id = req.user.id;
     res.cookie("id", req.user.id);
     try {
-        const notes = await Note.find();
+        const notes = await Note.findById({ _id: id });
         res.render("index", { notes });
     } catch (error) {
         console.error(error);
